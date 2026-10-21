@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    ports: ["8000:7860"]
+    environment:
+      API_KEY: ${API_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      HF_TOKEN: ${HF_TOKEN:-}
+      LLM_PROVIDER: ${LLM_PROVIDER:-auto}
+      RATE_LIMIT_PER_MIN: ${RATE_LIMIT_PER_MIN:-60}
+    volumes: ["insight-data:/data"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    restart: unless-stopped
+volumes:
+  insight-data:

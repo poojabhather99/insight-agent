@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insight Agent</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <button id="menu" class="icon" type="button" aria-label="Show datasets">☰</button>
+  <div class="brand"><span class="logo" aria-hidden="true"></span>Insight Agent</div>
+  <span id="llm" class="badge" title="Model backend"></span>
+  <span class="spacer"></span>
+  <button id="keybtn" class="ghost" type="button" hidden>API key</button>
+  <button id="theme" class="ghost" type="button" aria-label="Switch theme">Theme</button>
+</header>
+
+<div class="layout">
+  <aside id="side" class="side">
+    <div class="side-head">
+      <h2>Datasets</h2>
+      <button id="sample" class="ghost" type="button">Try sample data</button>
+    </div>
+    <label id="drop" class="drop" for="file">
+      <input id="file" type="file" accept=".csv,text/csv" hidden>
+      <strong>Upload a CSV</strong>
+      <span id="droplimit">or drop it here</span>
+    </label>
+    <ul id="dslist" class="dslist"></ul>
+    <h2 class="hist-title">History</h2>
+    <ul id="history" class="history"></ul>
+  </aside>
+
+  <main class="main">
+    <section id="empty" class="empty">
+      <h1>Ask your data a question</h1>
+      <p>Upload a CSV or load the sample, then ask in plain English. The agent plans, runs read-only SQL in a sandbox, draws a chart, and shows every step it took.</p>
+    </section>
+
+    <section id="work" hidden>
+      <div class="dshead">
+        <div><h1 id="dsname"></h1><p id="dsmeta" class="muted"></p></div>
+        <div class="actions"><button id="toggleprev" class="ghost" type="button">Preview rows</button><button id="delete" class="ghost danger" type="button">Delete</button></div>
+      </div>
+      <div id="preview" class="tablewrap" hidden></div>
+      <div id="schema" class="schema"></div>
+      <div id="chips" class="chips" aria-label="Suggested questions"></div>
+      <div id="thread" class="thread" aria-live="polite"></div>
+      <form id="ask" class="ask" autocomplete="off">
+        <input id="q" type="text" minlength="3" maxlength="500" placeholder="e.g. What is the completion rate by district?" aria-label="Your question" required>
+        <button id="go" class="primary" type="submit">Ask</button>
+      </form>
+    </section>
+  </main>
+</div>
+
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>
